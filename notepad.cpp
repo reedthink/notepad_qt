@@ -4,7 +4,18 @@
 #include <QTextStream>
 #include <QFileDialog>
 #include <QMessageBox>
-#include<QFontDialog>
+#include <QFont>
+#include <QFontDialog>
+
+#if defined(QT_PRINTSUPPORT_LIB)
+#include <QtPrintSupport/qtprintsupportglobal.h>
+#if QT_CONFIG(printer)
+#if QT_CONFIG(printdialog)
+#include <QPrintDialog>
+#endif // QT_CONFIG(printdialog)
+#include <QPrinter>
+#endif // QT_CONFIG(printer)
+#endif // QT_PRINTSUPPORT_LIB
 
 Notepad::Notepad(QWidget *parent)
     : QMainWindow(parent)
@@ -19,26 +30,26 @@ Notepad::Notepad(QWidget *parent)
     connect(ui->actionSave_as, &QAction::triggered, this, &Notepad::saveAs);
     connect(ui->actionPrint, &QAction::triggered, this, &Notepad::print);
     connect(ui->actionExit, &QAction::triggered, this, &Notepad::exit);
-    connect(ui->actionCopy, &QAction::triggered, this, &Notepad::copy);
-    connect(ui->actionCut, &QAction::triggered, this, &Notepad::cut);
-    connect(ui->actionPaste, &QAction::triggered, this, &Notepad::paste);
-    connect(ui->actionUndo, &QAction::triggered, this, &Notepad::undo);
-    connect(ui->actionRedo, &QAction::triggered, this, &Notepad::redo);
-    connect(ui->actionFont, &QAction::triggered, this, &Notepad::selectFont);
-    connect(ui->actionBold, &QAction::triggered, this, &Notepad::setFontBold);
-    connect(ui->actionUnderline, &QAction::triggered, this, &Notepad::setFontUnderline);
-    connect(ui->actionItalic, &QAction::triggered, this, &Notepad::setFontItalic);
-    connect(ui->actionAbout, &QAction::triggered, this, &Notepad::about);
+//    connect(ui->actionCopy, &QAction::triggered, this, &Notepad::copy);
+//    connect(ui->actionCut, &QAction::triggered, this, &Notepad::cut);
+//    connect(ui->actionPaste, &QAction::triggered, this, &Notepad::paste);
+//    connect(ui->actionUndo, &QAction::triggered, this, &Notepad::undo);
+//    connect(ui->actionRedo, &QAction::triggered, this, &Notepad::redo);
+//    connect(ui->actionFont, &QAction::triggered, this, &Notepad::selectFont);
+//    connect(ui->actionBold, &QAction::triggered, this, &Notepad::setFontBold);
+//    connect(ui->actionUnderline, &QAction::triggered, this, &Notepad::setFontUnderline);
+//    connect(ui->actionItalic, &QAction::triggered, this, &Notepad::setFontItalic);
+//    connect(ui->actionAbout, &QAction::triggered, this, &Notepad::about);
 
-    #if !QT_CONFIG(printer)
-        ui->actionPrint->setEnabled(false);
-    #endif
+//#if !QT_CONFIG(printer)
+//    ui->actionPrint->setEnabled(false);
+//#endif
 
-    #if !QT_CONFIG(clipboard)
-        ui->actionCut->setEnabled(false);
-        ui->actionCopy->setEnabled(false);
-        ui->actionPaste->setEnabled(false);
-    #endif
+//#if !QT_CONFIG(clipboard)
+//    ui->actionCut->setEnabled(false);
+//    ui->actionCopy->setEnabled(false);
+//    ui->actionPaste->setEnabled(false);
+//#endif
 
 }
 
@@ -97,7 +108,7 @@ void Notepad::save()
 
 void Notepad::saveAs()
 {
-    QString fileName = QFileDialog::getSaveFileName(this "Save as");
+    QString fileName = QFileDialog::getSaveFileName(this, "Save as");
     QFile file(fileName);
 
     if (!file.open(QFile::WriteOnly | QFile::Text))
@@ -115,15 +126,15 @@ void Notepad::saveAs()
 
 void Notepad::print()
 {
-#if QT_CONFIG(printer)
-    QPrinter printDev;
-#if QT_CONFIG(printdialog)
-    QPrintDialog dialog(&printDev, this);
-    if (dialog.exec()==QDialog::Rejected)
-        return;
-#endif
-    ui->textEdit->print(&printDev);
-#endif
+//#if QT_CONFIG(printer)
+//    QPrinter printDev;
+//#if QT_CONFIG(printdialog)
+//    QPrintDialog dialog(&printDev, this);
+//    if (dialog.exec()==QDialog::Rejected)
+//        return;
+//#endif
+//    ui->textEdit->print(&printDev);
+//#endif
 }
 
 void Notepad::exit()
@@ -163,22 +174,15 @@ void Notepad::redo()
     ui->textEdit->redo();
 }
 
-void Notepad::selectFont()
-{
-    bool fontSelected;
-    QFont font = QFontDialog::getFont(&fontSelected, this);
-    if (fontSelected)
-    {
-        ui->textEdit->setFont(font);
-    }
-}
-
-
-
-
-
-
-
+//void Notepad::selectFont()
+//{
+//    bool fontSelected;
+//    QFont font = QFontDialog::getFont(&fontSelected, this);
+//    if (fontSelected)
+//    {
+//        ui->textEdit->setFont(font);
+//    }
+//}
 
 
 
