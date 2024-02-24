@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <QFont>
 #include <QFontDialog>
+#include <QtDebug>
 
 #if defined(QT_PRINTSUPPORT_LIB)
 #include <QtPrintSupport/qtprintsupportglobal.h>
@@ -35,11 +36,11 @@ Notepad::Notepad(QWidget *parent)
 //    connect(ui->actionPaste, &QAction::triggered, this, &Notepad::paste);
 //    connect(ui->actionUndo, &QAction::triggered, this, &Notepad::undo);
 //    connect(ui->actionRedo, &QAction::triggered, this, &Notepad::redo);
-//    connect(ui->actionFont, &QAction::triggered, this, &Notepad::selectFont);
-//    connect(ui->actionBold, &QAction::triggered, this, &Notepad::setFontBold);
-//    connect(ui->actionUnderline, &QAction::triggered, this, &Notepad::setFontUnderline);
-//    connect(ui->actionItalic, &QAction::triggered, this, &Notepad::setFontItalic);
-//    connect(ui->actionAbout, &QAction::triggered, this, &Notepad::about);
+    connect(ui->actionFont, &QAction::triggered, this, &Notepad::selectFont);
+    connect(ui->actionBold, &QAction::triggered, this, &Notepad::setFontBold);
+    connect(ui->actionUnderline, &QAction::triggered, this, &Notepad::setFontUnderline);
+    connect(ui->actionItalic, &QAction::triggered, this, &Notepad::setFontItalic);
+    connect(ui->actionAbout, &QAction::triggered, this, &Notepad::about);
 
 //#if !QT_CONFIG(printer)
 //    ui->actionPrint->setEnabled(false);
@@ -174,19 +175,41 @@ void Notepad::redo()
     ui->textEdit->redo();
 }
 
-//void Notepad::selectFont()
-//{
-//    bool fontSelected;
-//    QFont font = QFontDialog::getFont(&fontSelected, this);
-//    if (fontSelected)
-//    {
-//        ui->textEdit->setFont(font);
-//    }
-//}
+void Notepad::selectFont()
+{
+    bool fontSelected;
+    QFont font = QFontDialog::getFont(&fontSelected, this);
+    if (fontSelected)
+    {
+        ui->textEdit->setFont(font);
+    }
+}
 
+void Notepad::setFontUnderline(bool underline)
+{
+    //这个参数怎么传？
+    qDebug()<<underline<<"测试看看看";
+    underline = true;
+    ui->textEdit->setFontUnderline(underline);
+}
 
+void Notepad::setFontItalic(bool italic)
+{
+    italic = true;
+    ui->textEdit->setFontItalic(italic);
+}
 
+void Notepad::setFontBold(bool bold)
+{
 
+//    bold ? ui->textEdit->setFontWeight(QFont::Bold) : ui->textEdit->setFontWeight(QFont::Normal); // 传入参数还没搞明白
+    ui->textEdit->setFontWeight(QFont::Bold);
+}
+
+void Notepad::about()
+{
+    QMessageBox::about(this, tr("About notepad"), tr("这个<b>Notepad</b>是qt代码示例，基于qtwidgets"));
+}
 
 
 

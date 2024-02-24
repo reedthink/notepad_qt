@@ -27,24 +27,11 @@ private slots:
     void paste();
     void undo();
     void redo();
-//    void selectFont();
-//    void setFontBold(bool bold);
-//    void setFontUnderline(bool underline);
-//    void setFontItalic(bool italic);
-//    void about();
-
-
-//    void on_actionOpen_triggered();
-
-//    void on_actionSave_triggered();
-
-//    void on_actionNew_triggered();
-
-//    void on_actionSave_as_triggered();
-
-//    void on_actionPrint_triggered();
-
-//    void on_actionExit_triggered();
+    void selectFont();
+    void setFontBold(bool bold);
+    void setFontUnderline(bool underline);
+    void setFontItalic(bool italic);
+    void about();
 
 private:
     Ui::Notepad *ui;

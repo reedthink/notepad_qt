@@ -45,6 +45,11 @@
     <addaction name="actionSave_as"/>
     <addaction name="actionPrint"/>
     <addaction name="actionExit"/>
+    <addaction name="actionFont"/>
+    <addaction name="actionBold"/>
+    <addaction name="actionUnderline"/>
+    <addaction name="actionItalic"/>
+    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuNew"/>
   </widget>
@@ -76,6 +81,31 @@
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionFont">
+   <property name="text">
+    <string>Font</string>
+   </property>
+  </action>
+  <action name="actionBold">
+   <property name="text">
+    <string>Bold</string>
+   </property>
+  </action>
+  <action name="actionUnderline">
+   <property name="text">
+    <string>Underline</string>
+   </property>
+  </action>
+  <action name="actionItalic">
+   <property name="text">
+    <string>Italic</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
    </property>
   </action>
  </widget>
